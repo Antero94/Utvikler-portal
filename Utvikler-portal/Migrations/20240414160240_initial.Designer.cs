@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Utvikler_portal.Data;
 
 #nullable disable
 
-namespace Utvikler_portal.Data.Migrations
+namespace Utvikler_portal.Migrations
 {
     [DbContext(typeof(UtviklerPortalDbContext))]
-    partial class UtviklerPortalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414160240_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

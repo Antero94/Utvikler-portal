@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Utvikler_portal.Auth.Repository;
+using Utvikler_portal.Auth.Services;
 using Utvikler_portal.Data;
 using Utvikler_portal.Mappers;
 using Utvikler_portal.Mappers.Interface;
@@ -18,7 +20,10 @@ builder.Services.AddScoped<IMapper<JobPost, JobPostDTO>, JobPostMapper>();
 builder.Services.AddDbContext<UtviklerPortalDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 30))));
-
+builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<IEncryptionService, EncryptionService>();
+builder.Services.AddTransient<IMemberService, MemberService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
