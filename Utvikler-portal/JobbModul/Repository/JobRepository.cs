@@ -63,7 +63,6 @@ public class JobRepository : IJobRepository
     {
         await _dbContext.JobPosts.Where(x => x.Id == id)
             .ExecuteUpdateAsync(setters => setters
-            .SetProperty(x => x.Id, jobpost.Id)
             .SetProperty(x => x.CompanyAccountId, jobpost.CompanyAccountId)
             .SetProperty(x => x.Employer, jobpost.Employer)
             .SetProperty(x => x.Position, jobpost.Position)

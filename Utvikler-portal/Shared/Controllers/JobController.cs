@@ -30,11 +30,11 @@ public class JobController : ControllerBase
     }
 
     [HttpPost("CreateJob")]
-    public async Task<ActionResult<JobPostDTO>> CreateJobAsync(JobPostDTO jobPostDTO)
+    public async Task<ActionResult<JobPostDTO>> CreateJobAsync(JobRegistrationDTO dto)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var job = await _jobService.CreateJobAsync(jobPostDTO);
+        var job = await _jobService.CreateJobAsync(dto);
         if (job == null) return BadRequest("Kunne ikke legge til jobb");
 
         return Ok(job);

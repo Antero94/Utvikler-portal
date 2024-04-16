@@ -9,10 +9,10 @@ using Utvikler_portal.Shared.Data;
 
 #nullable disable
 
-namespace Utvikler_portal.Data.Migrations
+namespace Utvikler_portal.Shared.Data.Migrations
 {
     [DbContext(typeof(UtviklerPortalDbContext))]
-    [Migration("20240316055050_InitialCreate")]
+    [Migration("20240416125653_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,13 +25,11 @@ namespace Utvikler_portal.Data.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Utvikler_portal.Models.Entities.CompanyAccount", b =>
+            modelBuilder.Entity("Utvikler_portal.JobbModul.Models.Entities.CompanyAccount", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("CompanyEmail")
                         .IsRequired()
@@ -50,37 +48,22 @@ namespace Utvikler_portal.Data.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("HashedPassword")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Salt")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
 
                     b.HasKey("Id");
 
                     b.ToTable("CompanyAccounts");
                 });
 
-            modelBuilder.Entity("Utvikler_portal.Models.Entities.JobPost", b =>
+            modelBuilder.Entity("Utvikler_portal.JobbModul.Models.Entities.JobPost", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("char(36)");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CompanyAccountId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CompanyAccountId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("ContactOne")
                         .IsRequired()
@@ -143,8 +126,8 @@ namespace Utvikler_portal.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime(6)");
@@ -156,63 +139,9 @@ namespace Utvikler_portal.Data.Migrations
                     b.ToTable("JobPosts");
                 });
 
-            modelBuilder.Entity("Utvikler_portal.Models.Entities.UserAccount", b =>
+            modelBuilder.Entity("Utvikler_portal.JobbModul.Models.Entities.JobPost", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<string>("HashedPassword")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("Salt")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserAccounts");
-                });
-
-            modelBuilder.Entity("Utvikler_portal.Models.Entities.JobPost", b =>
-                {
-                    b.HasOne("Utvikler_portal.Models.Entities.CompanyAccount", "CompanyAccount")
+                    b.HasOne("Utvikler_portal.JobbModul.Models.Entities.CompanyAccount", "CompanyAccount")
                         .WithMany("JobPosts")
                         .HasForeignKey("CompanyAccountId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -221,7 +150,7 @@ namespace Utvikler_portal.Data.Migrations
                     b.Navigation("CompanyAccount");
                 });
 
-            modelBuilder.Entity("Utvikler_portal.Models.Entities.CompanyAccount", b =>
+            modelBuilder.Entity("Utvikler_portal.JobbModul.Models.Entities.CompanyAccount", b =>
                 {
                     b.Navigation("JobPosts");
                 });

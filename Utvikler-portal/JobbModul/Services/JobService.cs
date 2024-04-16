@@ -10,20 +10,22 @@ namespace Utvikler_portal.JobbModul.Services;
 public class JobService : IJobService
 {
     private readonly IMapper<JobPost, JobPostDTO> _jobMapper;
+    private readonly IMapper<JobPost, JobRegistrationDTO> _jobRegistrationMapper;
     private readonly IJobRepository _jobRepository;
     private readonly IHttpContextAccessor _httpContextAccessor;
-    public JobService(IMapper<JobPost, JobPostDTO> jobMapper, IJobRepository jobRepository, IHttpContextAccessor httpContextAccessor)
+    public JobService(IMapper<JobPost, JobPostDTO> jobMapper, IMapper<JobPost, JobRegistrationDTO> jobRegistrationMapper,IJobRepository jobRepository, IHttpContextAccessor httpContextAccessor)
     {
         _jobMapper = jobMapper;
+        _jobRegistrationMapper = jobRegistrationMapper;
         _jobRepository = jobRepository;
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<JobPostDTO?> CreateJobAsync(JobPostDTO dto)
+    public async Task<JobPostDTO?> CreateJobAsync(JobRegistrationDTO dto)
     {
-        var job = _jobMapper.MapToModel(dto);
+        var job = _jobRegistrationMapper.MapToModel(dto);
         //string companyId = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
-        job.CompanyAccountId = new Guid(); //new Guid(companyId);
+        //job.CompanyAccountId = new Guid(companyId);
         var res = await _jobRepository.CreateJobAsync(job);
         if (res == null) return null;
         return _jobMapper.MapToDTO(res);
@@ -62,7 +64,7 @@ public class JobService : IJobService
         var jobUpdated = _jobMapper.MapToModel(dto);
         jobUpdated.Id = id;
         //string companyId = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
-        jobUpdated.CompanyAccountId = new Guid(); //new Guid(companyId);
+        //jobUpdated.CompanyAccountId = new Guid(); //new Guid(companyId);
         var res = await _jobRepository.UpdateJobAsync(id, jobUpdated);
         return res != null ? _jobMapper.MapToDTO(jobUpdated) : null;
     }

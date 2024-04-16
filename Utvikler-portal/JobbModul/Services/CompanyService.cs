@@ -23,6 +23,7 @@ public class CompanyService : ICompanyService
         var company = _registrationMapper.MapToModel(dto);
 
         var res = await _companyRepository.CreateCompanyAccountAsync(company);
+        if (res == null) return null;
         return _companyMapper.MapToDTO(res!);
     }
 

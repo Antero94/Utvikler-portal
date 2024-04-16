@@ -6,7 +6,7 @@ public interface IJobService
 {
     Task<ICollection<JobPostDTO>> GetAllJobsAsync(int pageNr, int pageSize, string sortBy);
     Task<JobPostDTO?> GetJobByIdAsync(Guid id);
-    Task<JobPostDTO?> CreateJobAsync(JobPostDTO dto);
+    Task<JobPostDTO?> CreateJobAsync(JobRegistrationDTO dto);
     Task<JobPostDTO?> UpdateJobAsync(Guid id, JobPostDTO dto);
     Task<JobPostDTO?> DeleteJobAsync(Guid id);
 }
