@@ -20,7 +20,7 @@ public class JobController : ControllerBase
         return Ok(await _jobService.GetAllJobsAsync(pageNr, pageSize, sortBy));
     }
 
-    [HttpGet("GetJob", Name = "GetJob")]
+    [HttpGet("GetJob={id}", Name = "GetJob")]
     public async Task<ActionResult<JobPostDTO>> GetJobAsync(Guid id)
     {
         var job = await _jobService.GetJobByIdAsync(id);
@@ -50,7 +50,6 @@ public class JobController : ControllerBase
 
         return Ok(job);
     }
-
 
     [HttpDelete("DeleteJob", Name = "DeleteJob")]
     public async Task<ActionResult<JobPostDTO>> DeleteJobAsync(Guid id)

@@ -9,9 +9,11 @@ namespace Utvikler_portal.Shared.Controllers;
 public class CompanyController : ControllerBase
 {
     private readonly ICompanyService _companyService;
-    public CompanyController(ICompanyService companyService)
+    private readonly IJobService _jobService;
+    public CompanyController(ICompanyService companyService, IJobService jobService)
     {
         _companyService = companyService;
+        _jobService = jobService;
     }
 
     [HttpPost("CreateCompany")]
@@ -31,13 +33,19 @@ public class CompanyController : ControllerBase
         return Ok(await _companyService.GetAllCompaniesAsync(pageNr, pageSize));
     }
 
-    [HttpGet("GetCompany", Name = "GetCompany")]
-    public async Task<ActionResult<CompanyAccountDTO>> GetCompanyAsync(Guid id)
+    [HttpGet("GetCompany={userId:Guid}", Name = "GetCompany")]
+    public async Task<ActionResult<CompanyAccountDTO>> GetCompanyAsync(Guid userId)
     {
-        var company = await _companyService.GetCompanyByIdAsync(id);
+        var company = await _companyService.GetCompanyByIdAsync(userId);
         if (company == null) return NotFound("Fant ikke bruker");
 
         return Ok(company);
+    }
+
+    [HttpGet("GetJobPosts={userId:Guid}", Name = "GetJobPosts")]
+    public async Task<ActionResult<IEnumerable<JobPostDTO>>> GetJobPostsAsync(Guid userId, int pageNr = 1, int pageSize = 10)
+    {
+        return Ok(await _jobService.GetCompanySpecificJobsAsync(userId, pageNr, pageSize));
     }
 
     [HttpPut("UpdateCompany", Name = "UpdateCompany")]

@@ -54,6 +54,17 @@ public class JobRepository : IJobRepository
         return jobs;
     }
 
+    public async Task<ICollection<JobPost>> GetCompanySpecificJobsAsync(Guid id, int pageNr, int pageSize)
+    {
+        var jobs = await _dbContext.JobPosts
+            .Where(x => x.CompanyAccountId == id)
+            .Skip(pageSize * (pageNr - 1))
+            .OrderBy(x => x.Created)
+            .Take(pageSize).ToListAsync();
+
+        return jobs;
+    }
+
     public async Task<JobPost?> GetJobByIdAsync(Guid id)
     {
         return await _dbContext.JobPosts.FirstOrDefaultAsync(x => x.Id == id);

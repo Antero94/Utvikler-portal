@@ -48,6 +48,14 @@ public class JobService : IJobService
         return dto;
     }
 
+    public async Task<ICollection<JobPostDTO>> GetCompanySpecificJobsAsync(Guid id, int pageNr, int pageSize)
+    {
+        var jobs = await _jobRepository.GetCompanySpecificJobsAsync(id, pageNr, pageSize);
+        var dto = jobs.Select(_jobMapper.MapToDTO).ToList();
+
+        return dto;
+    }
+
     public async Task<JobPostDTO?> GetJobByIdAsync(Guid id)
     {
         var job = await _jobRepository.GetJobByIdAsync(id);

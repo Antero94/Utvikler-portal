@@ -10,6 +10,18 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <Compile Remove="JobSeekerModul\**" />
+    <Content Remove="JobSeekerModul\**" />
+    <EmbeddedResource Remove="JobSeekerModul\**" />
+    <None Remove="JobSeekerModul\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Shared\Controllers\EducationController.cs" />
+    <Compile Remove="Shared\Controllers\ExperienceController.cs" />
+    <Compile Remove="Shared\Controllers\SkillController.cs" />
+    <Compile Remove="Shared\Controllers\UserController.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
