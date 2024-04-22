@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Utvikler_portal.Auth.DTO;
 using Utvikler_portal.Auth.Services;
 
-namespace Utvikler_portal.Shared;
+namespace Utvikler_portal.Shared.Controllers;
 
 public class AuthController : Controller
 {
@@ -14,29 +14,28 @@ public class AuthController : Controller
     }
 
     [HttpPost("register")]
-
     public async Task<IActionResult> Register([FromBody] RegisterMemberRequest request)
     {
         try
         {
-            var response=await _memberService.RegisterMember(request);
+            var response = await _memberService.RegisterMember(request);
             return Ok(response);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return BadRequest();
         }
     }
-    [HttpPost("login")]
 
+    [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginUserRequest request)
     {
         try
         {
-            var response=await _memberService.Login(request);
+            var response = await _memberService.Login(request);
             return Ok(response);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return BadRequest();
         }

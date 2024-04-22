@@ -10,11 +10,6 @@ using Utvikler_portal.JobbModul.Services.Interfaces;
 using Utvikler_portal.Shared.Data;
 using Utvikler_portal.Auth.Repository;
 using Utvikler_portal.Auth.Services;
-using Utvikler_portal.Data;
-using Utvikler_portal.Mappers;
-using Utvikler_portal.Mappers.Interface;
-using Utvikler_portal.Models.DTOs;
-using Utvikler_portal.Models.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 

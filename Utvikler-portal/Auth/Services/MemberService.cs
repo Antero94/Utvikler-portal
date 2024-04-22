@@ -92,7 +92,7 @@ public class MemberService:IMemberService
                 "User sucessfully registered");
             return response;
         }
-        catch (InvalidUserTypeException e)
+        catch (InvalidUserTypeException)
         {
             throw;
         }

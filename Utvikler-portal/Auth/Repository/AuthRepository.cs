@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Utvikler_portal.Auth.ValueObjects;
-using Utvikler_portal.Data;
+using Utvikler_portal.Shared.Data;
 using Utvikler_portal.Models.Entities;
 
 namespace Utvikler_portal.Auth.Repository;
