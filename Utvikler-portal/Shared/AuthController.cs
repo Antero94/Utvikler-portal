@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Utvikler_portal.Auth.DTO;
 using Utvikler_portal.Auth.Services;
