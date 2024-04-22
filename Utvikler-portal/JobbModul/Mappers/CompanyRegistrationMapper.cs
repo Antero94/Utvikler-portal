@@ -13,7 +13,7 @@ public class CompanyRegistrationMapper : IMapper<CompanyAccount, CompanyRegistra
 
     public CompanyAccount MapToModel(CompanyRegistrationDTO dto)
     {
-        var dtNow = DateTime.Now;
+        var dtNow = DateTime.UtcNow;
 
         return new CompanyAccount()
         {

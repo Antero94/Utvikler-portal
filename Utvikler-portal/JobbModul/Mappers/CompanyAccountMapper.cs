@@ -13,13 +13,13 @@ public class CompanyAccountMapper : IMapper<CompanyAccount, CompanyAccountDTO>
             model.CompanyName,
             model.CompanyPhone,
             model.CompanyEmail,
-            model.Created,
-            model.Updated);
+            model.Created.ToLocalTime(),
+            model.Updated.ToLocalTime());
     }
 
     public CompanyAccount MapToModel(CompanyAccountDTO dto)
     {
-        var dtNow = DateTime.Now;
+        var dtNow = DateTime.UtcNow;
 
         return new CompanyAccount()
         {

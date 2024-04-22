@@ -24,13 +24,13 @@ public class JobPostMapper : IMapper<JobPost, JobPostDTO>
             model.ContactTwo,
             model.ContactOnePhone,
             model.ContactTwoPhone,
-            model.Created,
-            model.Updated);
+            model.Created.ToLocalTime(),
+            model.Updated.ToLocalTime());
     }
 
     public JobPost MapToModel(JobPostDTO dto)
     {
-        var dtNow = DateTime.Now;
+        var dtNow = DateTime.UtcNow;
 
         return new JobPost()
         {

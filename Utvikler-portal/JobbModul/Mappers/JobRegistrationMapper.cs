@@ -13,7 +13,7 @@ public class JobRegistrationMapper : IMapper<JobPost, JobRegistrationDTO>
 
     public JobPost MapToModel(JobRegistrationDTO dto)
     {
-        var dtNow = DateTime.Now;
+        var dtNow = DateTime.UtcNow;
 
         return new JobPost
         {

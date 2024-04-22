@@ -7,12 +7,10 @@ public class CompanyAccount
     [Key]
     public Guid Id { get; set; }
 
-    [Required]
-    [MinLength(1), MaxLength(30)]
+    [Required, RegularExpression(@"^[a-zA-ZæøåÆØÅ][a-zA-ZæøåÆØÅ\s]{1,40}$")]
     public string CompanyName { get; set; } = string.Empty;
 
-    [Required]
-    [MinLength(1), MaxLength(30)]
+    [Phone]
     public string CompanyPhone { get; set; } = string.Empty;
 
     [EmailAddress]
