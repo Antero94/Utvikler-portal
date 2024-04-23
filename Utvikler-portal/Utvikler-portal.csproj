@@ -10,6 +10,20 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
+    <Compile Remove="Repository\**" />
+    <Compile Remove="Services\**" />
+    <Compile Remove="Shared\Data\Migrations\**" />
+    <Content Remove="Repository\**" />
+    <Content Remove="Services\**" />
+    <Content Remove="Shared\Data\Migrations\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <EmbeddedResource Remove="Shared\Data\Migrations\**" />
+    <None Remove="Repository\**" />
+    <None Remove="Services\**" />
+    <None Remove="Shared\Data\Migrations\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.18" />
@@ -23,12 +37,6 @@
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Shared\Data\Migrations\" />
-    <Folder Include="Repository\Interfaces\" />
-    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
 </Project>

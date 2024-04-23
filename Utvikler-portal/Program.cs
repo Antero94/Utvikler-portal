@@ -28,7 +28,6 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<UtviklerPortalDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 30))));
-
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IEncryptionService, EncryptionService>();
 builder.Services.AddTransient<IMemberService, MemberService>();

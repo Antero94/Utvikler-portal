@@ -5,10 +5,6 @@ VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utvikler-portal", "Utvikler-portal\Utvikler-portal.csproj", "{9FC3BE43-D6E9-4F4A-A582-836E08FCC370}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JobbModul", "JobbModul", "{092203F9-B97C-40BE-A18B-3736415803CA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{7DDD16B0-094A-41AF-8A9C-0BB3B6902216}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtviklerPortalAPI.UnitTests", "Tests\UtviklerPortalAPI.UnitTests\UtviklerPortalAPI.UnitTests.csproj", "{DA84A945-F429-43AC-B7A9-700E7416AAE8}"
 EndProject
 Global
@@ -30,12 +26,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7DDD16B0-094A-41AF-8A9C-0BB3B6902216} = {092203F9-B97C-40BE-A18B-3736415803CA}
-		{DA84A945-F429-43AC-B7A9-700E7416AAE8} = {7DDD16B0-094A-41AF-8A9C-0BB3B6902216}
+		{DA84A945-F429-43AC-B7A9-700E7416AAE8} = {00000000-0000-0000-0000-000000000000}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E7F1712A-F0B0-4A64-B7E3-AFA28406056B}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
