@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Utvikler_portal.Auth.DTO;
 using Utvikler_portal.Auth.Services;
@@ -41,4 +43,6 @@ public class AuthController : Controller
             return BadRequest();
         }
     }
+
+    
 }

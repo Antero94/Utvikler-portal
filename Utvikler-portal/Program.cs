@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Utvikler_portal.Auth.DependencyInjection;
 using Utvikler_portal.Auth.Repository;
 using Utvikler_portal.Auth.Services;
 using Utvikler_portal.Data;
@@ -18,11 +19,8 @@ builder.Services.AddScoped<IMapper<UserAccount, UserRegistrationDTO>, UserRegist
 builder.Services.AddScoped<IMapper<UserAccount, UserAccountDTO>, UserAccountMapper>();
 builder.Services.AddScoped<IMapper<JobPost, JobPostDTO>, JobPostMapper>();
 
+builder.Services.AddAuth(builder.Configuration);
 
-builder.Services.AddTransient<ITokenService, TokenService>();
-builder.Services.AddTransient<IEncryptionService, EncryptionService>();
-builder.Services.AddTransient<IMemberService, MemberService>();
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
