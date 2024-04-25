@@ -1,4 +1,5 @@
-﻿using Utvikler_portal.JobbModul.Mappers.Interface;
+﻿using System.Security.Claims;
+using Utvikler_portal.JobbModul.Mappers.Interface;
 using Utvikler_portal.JobbModul.Models.DTOs;
 using Utvikler_portal.JobbModul.Models.Entities;
 using Utvikler_portal.JobbModul.Repository.Interfaces;
@@ -11,20 +12,28 @@ public class CompanyService : ICompanyService
     private readonly IMapper<CompanyAccount, CompanyRegistrationDTO> _registrationMapper;
     private readonly IMapper<CompanyAccount, CompanyAccountDTO> _companyMapper;
     private readonly ICompanyRepository _companyRepository;
-    public CompanyService(IMapper<CompanyAccount, CompanyAccountDTO> companyMapper, IMapper<CompanyAccount, CompanyRegistrationDTO> registrationMapper, ICompanyRepository companyRepository)
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    public CompanyService(IMapper<CompanyAccount, CompanyAccountDTO> companyMapper, IMapper<CompanyAccount, CompanyRegistrationDTO> registrationMapper,
+            ICompanyRepository companyRepository, IHttpContextAccessor httpContextAccessor)
     {
         _companyMapper = companyMapper;
         _companyRepository = companyRepository;
         _registrationMapper = registrationMapper;
+        _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<CompanyAccountDTO?> CreateCompanyAccountAsync(CompanyRegistrationDTO dto)
+    public async Task<CompanyAccountDTO?> CreateCompanyAccountAsync(CompanyRegistrationDTO dto, Guid userId)
     {
         var company = _registrationMapper.MapToModel(dto);
+        string companyId = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
 
-        var res = await _companyRepository.CreateCompanyAccountAsync(company);
-        if (res == null) return null;
-        return _companyMapper.MapToDTO(res!);
+        if (Guid.TryParse(companyId, out Guid id) && id == userId)
+        {
+            company.Id = userId;
+            var res = await _companyRepository.CreateCompanyAccountAsync(company);
+            return res != null ? _companyMapper.MapToDTO(res) : null;
+        }
+        return null;
     }
 
     public async Task<CompanyAccountDTO?> DeleteAsync(Guid id)

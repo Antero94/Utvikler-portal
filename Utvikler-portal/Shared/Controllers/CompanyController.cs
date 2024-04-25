@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Utvikler_portal.JobbModul.Models.DTOs;
 using Utvikler_portal.JobbModul.Services.Interfaces;
 
@@ -17,11 +18,10 @@ public class CompanyController : ControllerBase
     }
 
     [HttpPost("CreateCompany")]
-    public async Task<ActionResult<CompanyAccountDTO>> CreateCompanyAccountAsync(CompanyRegistrationDTO dto)
+    [Authorize]
+    public async Task<ActionResult<CompanyAccountDTO>> CreateCompanyAccountAsync(CompanyRegistrationDTO dto, Guid userId)
     {
-        if (!ModelState.IsValid) { return BadRequest(ModelState); };
-
-        var company = await _companyService.CreateCompanyAccountAsync(dto);
+        var company = await _companyService.CreateCompanyAccountAsync(dto, userId);
         if (company == null) return BadRequest("Kunne ikke legge til konto");
 
         return Ok(company);
