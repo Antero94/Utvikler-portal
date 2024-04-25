@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utvikler-portal", "Utvikler-portal\Utvikler-portal.csproj", "{9FC3BE43-D6E9-4F4A-A582-836E08FCC370}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtviklerPortalAPI.UnitTests", "Tests\UtviklerPortalAPI.UnitTests\UtviklerPortalAPI.UnitTests.csproj", "{DA84A945-F429-43AC-B7A9-700E7416AAE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utvikler-portal", "Utvikler-portal\Utvikler-portal.csproj", "{9FC3BE43-D6E9-4F4A-A582-836E08FCC370}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,18 +15,13 @@ Global
 		{9FC3BE43-D6E9-4F4A-A582-836E08FCC370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FC3BE43-D6E9-4F4A-A582-836E08FCC370}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FC3BE43-D6E9-4F4A-A582-836E08FCC370}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA84A945-F429-43AC-B7A9-700E7416AAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA84A945-F429-43AC-B7A9-700E7416AAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA84A945-F429-43AC-B7A9-700E7416AAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA84A945-F429-43AC-B7A9-700E7416AAE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{DA84A945-F429-43AC-B7A9-700E7416AAE8} = {00000000-0000-0000-0000-000000000000}
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E7F1712A-F0B0-4A64-B7E3-AFA28406056B}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal

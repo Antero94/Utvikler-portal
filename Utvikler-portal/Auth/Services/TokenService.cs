@@ -32,7 +32,7 @@ public class TokenService:ITokenService
         var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
         return tokenValue;
     }
-    public string GenerateAccessToken(int Id, string name, string email,UserType type)
+    public string GenerateAccessToken(Guid Id, string name, string email,UserType type)
     {
             
         List<Claim> claims = new List<Claim>()
