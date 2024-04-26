@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Utvikler_portal.Auth.DependencyInjection;
 using Utvikler_portal.JobbModul.Mappers;
 using Utvikler_portal.JobbModul.Mappers.Interface;
 using Utvikler_portal.JobbModul.Models.DTOs;
@@ -18,7 +19,6 @@ using Utvikler_portal.JobSeekerModul.Repositories;
 using Utvikler_portal.JobSeekerModul.Repositories.Interfaces;
 using Utvikler_portal.JobSeekerModul.Services;
 using Utvikler_portal.JobSeekerModul.Services.Interfaces;
-using JobSeekerModul.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,10 +37,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<UtviklerPortalDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 30))));
-builder.Services.AddTransient<ITokenService, TokenService>();
-builder.Services.AddTransient<IEncryptionService, EncryptionService>();
-builder.Services.AddTransient<IMemberService, MemberService>();
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+
 
 builder.Services.AddScoped<IMaps<User, UserDTO>, UserMap>();
 builder.Services.AddScoped<IMaps<User, UserRegDTO>, UserRegMap>();
@@ -55,7 +52,7 @@ builder.Services.AddScoped<IExperienceService, ExperienceService>();
 builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
 builder.Services.AddScoped<ISkillService, SkillService>();
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
-
+builder.Services.AddAuth(builder.Configuration);
 
 var app = builder.Build();
 
