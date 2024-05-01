@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 ./Utvikler-portal/appsettings.json
+.DS_Store

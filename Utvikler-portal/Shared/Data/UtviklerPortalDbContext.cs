@@ -2,6 +2,7 @@
 using Utvikler_portal.Auth.ValueObjects;
 using Utvikler_portal.JobbModul.Models.Entities;
 using Utvikler_portal.Models.Entities;
+using Utvikler_portal.JobSeekerModul.Models.Entities;
 
 namespace Utvikler_portal.Shared.Data;
 
@@ -10,7 +11,12 @@ public class UtviklerPortalDbContext : DbContext
     public UtviklerPortalDbContext(DbContextOptions<UtviklerPortalDbContext> options) : base(options)
     {
     }
-    
+
+
+    public DbSet<User> User { get; set; }
+    public DbSet<Education> Educations { get; set; }
+    public DbSet<Experience> Experiences { get; set; }
+    public DbSet<Skill> Skills { get; set; }
     public DbSet<CompanyAccount> CompanyAccounts { get; set; }
     public DbSet<JobPost> JobPosts { get; set; }
     //public DbSet<UserAccount> UserAccounts { get; set; }
