@@ -10,9 +10,11 @@ namespace Utvikler_portal.Shared.Controllers;
 public class ExperienceController : ControllerBase
 {
 
+
     private readonly IExperienceService _experienceService;
 
     public ExperienceController(IExperienceService experienceService)
+
 
     {
         _experienceService = experienceService;

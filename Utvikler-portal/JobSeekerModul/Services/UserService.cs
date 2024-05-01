@@ -1,8 +1,10 @@
-﻿using Utvikler_portal.JobSeekerModul.Maps.Interfaces;
+﻿using System.Security.Claims;
+using Utvikler_portal.JobSeekerModul.Maps.Interfaces;
 using Utvikler_portal.JobSeekerModul.Models.Entities;
 using Utvikler_portal.JobSeekerModul.Models.DTOs;
 using Utvikler_portal.JobSeekerModul.Repositories.Interfaces;
 using Utvikler_portal.JobSeekerModul.Services.Interfaces;
+using System.ComponentModel.Design;
 
 
 namespace Utvikler_portal.JobSeekerModul.Services;
@@ -12,7 +14,7 @@ public class UserService : IUserService
     private readonly IUserRepository _userRepository;
     private readonly IMaps<User, UserDTO> _userMap;
 
-    public UserService(IMaps<User, UserDTO> userMap, IUserRepository userRepository)
+    public UserService(IMaps<User, UserDTO> userMap, IUserRepository userRepository, IHttpContextAccessor httpContextAccessor)
     {
         _userRepository = userRepository;
         _userMap = userMap;
@@ -25,6 +27,7 @@ public class UserService : IUserService
 
         return dTO;
     }
+
 
     public async Task<UserDTO?> GetUserByIdAsync(Guid id)
     {
@@ -58,13 +61,17 @@ public class UserService : IUserService
         return res != null ? _userMap.MapToDTO(userUpdated) : null;
     }
 
+
     public async Task<UserDTO?> DeleteUserAsync(Guid id)
     {
         var user = await _userRepository.GetUserByIdAsync(id);
         if (user == null)
             return null;
 
+
+
         await _userRepository.DeleteUserAsync(id);
         return _userMap.MapToDTO(user);
+
     }
 }

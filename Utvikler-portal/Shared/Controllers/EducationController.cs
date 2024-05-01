@@ -10,9 +10,11 @@ namespace Utvikler_portal.Shared.Controllers;
 public class EducationController : ControllerBase
 {
 
+
     private readonly IEducationService _educationService;
 
     public EducationController(IEducationService educationService)
+
 
     {
         _educationService = educationService;

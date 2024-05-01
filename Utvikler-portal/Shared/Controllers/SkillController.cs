@@ -10,9 +10,11 @@ namespace Utvikler_portal.Shared.Controllers;
 public class SkillController : ControllerBase
 {
 
+
     private readonly ISkillService _skillService;
 
     public SkillController(ISkillService skillService)
+
 
     {
         _skillService = skillService;
