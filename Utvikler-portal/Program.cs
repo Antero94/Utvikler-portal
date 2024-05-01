@@ -8,8 +8,8 @@ using Utvikler_portal.JobbModul.Repository.Interfaces;
 using Utvikler_portal.JobbModul.Services;
 using Utvikler_portal.JobbModul.Services.Interfaces;
 using Utvikler_portal.Shared.Data;
-using Utvikler_portal.Auth.Repository;
-using Utvikler_portal.Auth.Services;
+using Utvikler_portal.Shared.Policies;
+using Utvikler_portal.Auth.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,10 +28,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<UtviklerPortalDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 30))));
-builder.Services.AddTransient<ITokenService, TokenService>();
-builder.Services.AddTransient<IEncryptionService, EncryptionService>();
-builder.Services.AddTransient<IMemberService, MemberService>();
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddAuth(builder.Configuration);
+builder.Services.AddHandlers();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -41,7 +40,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

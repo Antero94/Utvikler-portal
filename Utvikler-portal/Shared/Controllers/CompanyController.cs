@@ -6,7 +6,7 @@ using Utvikler_portal.JobbModul.Services.Interfaces;
 namespace Utvikler_portal.Shared.Controllers;
 
 [Route("api/[controller]")]
-[ApiController]
+[ApiController, Authorize]
 public class CompanyController : ControllerBase
 {
     private readonly ICompanyService _companyService;
@@ -18,7 +18,6 @@ public class CompanyController : ControllerBase
     }
 
     [HttpPost("CreateCompany")]
-    [Authorize]
     public async Task<ActionResult<CompanyAccountDTO>> CreateCompanyAccountAsync(CompanyRegistrationDTO dto, Guid userId)
     {
         var company = await _companyService.CreateCompanyAccountAsync(dto, userId);
@@ -43,28 +42,26 @@ public class CompanyController : ControllerBase
     }
 
     [HttpGet("GetJobPosts={userId:Guid}", Name = "GetJobPosts")]
-    public async Task<ActionResult<IEnumerable<JobPostDTO>>> GetJobPostsAsync(Guid userId, int pageNr = 1, int pageSize = 10)
+    public async Task<ActionResult<IEnumerable<JobPostDTO>>> GetCompanySpecificJobsAsync(Guid userId, int pageNr = 1, int pageSize = 10)
     {
         return Ok(await _jobService.GetCompanySpecificJobsAsync(userId, pageNr, pageSize));
     }
 
-    [HttpPut("UpdateCompany", Name = "UpdateCompany")]
-    public async Task<ActionResult<CompanyAccountDTO>> UpdateCompanyAsync(Guid id, CompanyAccountDTO companyDTO)
+    [Authorize(Policy = "IdPolicy")]
+    [HttpPut("UpdateCompany={userId:Guid}", Name = "UpdateCompany")]
+    public async Task<ActionResult<CompanyAccountDTO>> UpdateCompanyAsync(Guid userId, CompanyAccountDTO companyDTO)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        var company = await _companyService.UpdateAsync(id, companyDTO);
+        var company = await _companyService.UpdateAsync(userId, companyDTO);
         if (company == null) return NotFound("Fant ikke bruker");
 
         return Ok(company);
     }
 
-    [HttpDelete("DeleteCompany", Name = "DeleteCompany")]
-    public async Task<ActionResult<CompanyAccountDTO>> DeleteCompanyAsync(Guid id)
+    [Authorize(Policy = "IdPolicy")]
+    [HttpDelete("DeleteCompany={userId:Guid}", Name = "DeleteCompany")]
+    public async Task<ActionResult<CompanyAccountDTO>> DeleteCompanyAsync(Guid userId)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        var company = await _companyService.DeleteAsync(id);
+        var company = await _companyService.DeleteAsync(userId);
         if (company == null) return NotFound("Fant ikke bruker");
 
         return Ok(company);

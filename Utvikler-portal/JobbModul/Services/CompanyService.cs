@@ -36,12 +36,12 @@ public class CompanyService : ICompanyService
         return null;
     }
 
-    public async Task<CompanyAccountDTO?> DeleteAsync(Guid id)
+    public async Task<CompanyAccountDTO?> DeleteAsync(Guid userId)
     {
-        var company = await _companyRepository.GetCompanyByIdAsync(id);
+        var company = await _companyRepository.GetCompanyByIdAsync(userId);
         if (company == null) return null;
 
-        var res = await _companyRepository.DeleteAsync(id);
+        var res = await _companyRepository.DeleteAsync(userId);
         if (res == null) return null;
 
         return _companyMapper.MapToDTO(company);
@@ -55,23 +55,23 @@ public class CompanyService : ICompanyService
         return dtos;
     }
 
-    public async Task<CompanyAccountDTO?> GetCompanyByIdAsync(Guid id)
+    public async Task<CompanyAccountDTO?> GetCompanyByIdAsync(Guid userId)
     {
-        var company = await _companyRepository.GetCompanyByIdAsync(id);
+        var company = await _companyRepository.GetCompanyByIdAsync(userId);
         if (company == null) return null;
 
         return _companyMapper.MapToDTO(company);
     }
 
-    public async Task<CompanyAccountDTO?> UpdateAsync(Guid id, CompanyAccountDTO dto)
+    public async Task<CompanyAccountDTO?> UpdateAsync(Guid userId, CompanyAccountDTO dto)
     {
-        var company = await _companyRepository.GetCompanyByIdAsync(id);
+        var company = await _companyRepository.GetCompanyByIdAsync(userId);
         if (company == null) return null;
 
         var companyUpdated = _companyMapper.MapToModel(dto);
-        companyUpdated.Id = id;
+        companyUpdated.Id = userId;
 
-        var res = await _companyRepository.UpdateAsync(id, companyUpdated);
+        var res = await _companyRepository.UpdateAsync(userId, companyUpdated);
         return res != null ? _companyMapper.MapToDTO(companyUpdated) : null;
     }
 }

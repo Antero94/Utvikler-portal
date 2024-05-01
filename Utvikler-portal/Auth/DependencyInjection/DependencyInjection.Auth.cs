@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Utvikler_portal.Auth.Repository;
 using Utvikler_portal.Auth.Services;
 
+
 namespace Utvikler_portal.Auth.DependencyInjection;
 
 public static class DependencyInjection
@@ -25,9 +26,9 @@ public static class DependencyInjection
                 ValidAudience = configuration.GetSection("AccessTokenOptions")["Audience"],
                 ValidIssuer = configuration.GetSection("AccessTokenOptions")["Issuer"],
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(configuration.GetSection("AccessTokenSecretKey")["Audience"]!)
+                    Encoding.UTF8.GetBytes(configuration.GetSection("AccessTokenOptions")["AccessTokenSecretKey"]!)
                 ),
-                ClockSkew=TimeSpan.Zero                    
+                ClockSkew=TimeSpan.Zero          
             };
         });
         return services;
