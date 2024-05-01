@@ -19,7 +19,6 @@ public class UtviklerPortalDbContext : DbContext
     public DbSet<Skill> Skills { get; set; }
     public DbSet<CompanyAccount> CompanyAccounts { get; set; }
     public DbSet<JobPost> JobPosts { get; set; }
-    //public DbSet<UserAccount> UserAccounts { get; set; }
     public DbSet<Member> Members { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

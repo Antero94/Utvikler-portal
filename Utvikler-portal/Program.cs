@@ -10,7 +10,6 @@ using Utvikler_portal.JobbModul.Services;
 using Utvikler_portal.JobbModul.Services.Interfaces;
 using Utvikler_portal.Shared.Data;
 using Utvikler_portal.Shared.Policies;
-using Utvikler_portal.Auth.DependencyInjection;
 using Utvikler_portal.JobSeekerModul.Maps;
 using Utvikler_portal.JobSeekerModul.Maps.Interfaces;
 using Utvikler_portal.JobSeekerModul.Models.DTOs;
@@ -37,8 +36,6 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<UtviklerPortalDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 30))));
-
-
 builder.Services.AddScoped<IMaps<User, UserDTO>, UserMap>();
 builder.Services.AddScoped<IMaps<User, UserRegDTO>, UserRegMap>();
 builder.Services.AddScoped<IMaps<Education, EducationDTO>, EducationMap>();
