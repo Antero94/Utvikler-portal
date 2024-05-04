@@ -34,8 +34,6 @@ public class JobPostMapper : IMapper<JobPost, JobPostDTO>
 
         return new JobPost()
         {
-            Id = dto.Id,
-            CompanyAccountId = dto.CompanyAccountId,
             Employer = dto.Employer,
             Position = dto.Position,
             JuniorOrSenior = dto.JuniorOrSenior,

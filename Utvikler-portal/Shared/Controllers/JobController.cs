@@ -22,9 +22,9 @@ public class JobController : ControllerBase
     }
 
     [HttpGet("GetJob={jobId:Guid}", Name = "GetJob")]
-    public async Task<ActionResult<JobPostDTO>> GetJobAsync(Guid id)
+    public async Task<ActionResult<JobPostDTO>> GetJobAsync(Guid jobId)
     {
-        var job = await _jobService.GetJobByIdAsync(id);
+        var job = await _jobService.GetJobByIdAsync(jobId);
         if (job == null) return NotFound("Job not found");
 
         return Ok(job);
@@ -42,25 +42,25 @@ public class JobController : ControllerBase
         return Ok(job);
     }
 
-    [Authorize]
+    [Authorize(Policy = "jobIdPolicy")]
     [HttpPut("UpdateJob={jobId:Guid}", Name = "UpdateJob")]
-    public async Task<ActionResult<JobPostDTO>> UpdateJobAsync(Guid id, JobPostDTO jobPostDTO)
+    public async Task<ActionResult<JobPostDTO>> UpdateJobAsync(Guid jobId, JobPostDTO jobPostDTO)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var job = await _jobService.UpdateJobAsync(id, jobPostDTO);
+        var job = await _jobService.UpdateJobAsync(jobId, jobPostDTO);
         if (job == null) return NotFound("Job not found");
 
         return Ok(job);
     }
 
-    [Authorize]
+    [Authorize(Policy = "jobIdPolicy")]
     [HttpDelete("DeleteJob={jobId:Guid}", Name = "DeleteJob")]
-    public async Task<ActionResult<JobPostDTO>> DeleteJobAsync(Guid id)
+    public async Task<ActionResult<JobPostDTO>> DeleteJobAsync(Guid jobId)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        var job = await _jobService.DeleteJobAsync(id);
+        var job = await _jobService.DeleteJobAsync(jobId);
         if (job == null) return NotFound("Job not found");
 
         return Ok(job);

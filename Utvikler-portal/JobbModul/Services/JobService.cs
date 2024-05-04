@@ -24,11 +24,12 @@ public class JobService : IJobService
     public async Task<JobPostDTO?> CreateJobAsync(JobRegistrationDTO dto)
     {
         var job = _jobRegistrationMapper.MapToModel(dto);
-        //string companyId = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
-        //job.CompanyAccountId = new Guid(companyId);
+        string companyId = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        job.CompanyAccountId = new Guid(companyId);
         var res = await _jobRepository.CreateJobAsync(job);
-        if (res == null) return null;
-        return _jobMapper.MapToDTO(res);
+        
+        return res != null ? _jobMapper.MapToDTO(res) : null;
     }
 
     public async Task<JobPostDTO?> DeleteJobAsync(Guid id)
@@ -71,8 +72,9 @@ public class JobService : IJobService
 
         var jobUpdated = _jobMapper.MapToModel(dto);
         jobUpdated.Id = id;
-        //string companyId = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
-        //jobUpdated.CompanyAccountId = new Guid(); //new Guid(companyId);
+        string companyId = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
+        jobUpdated.CompanyAccountId = new Guid(companyId);
+
         var res = await _jobRepository.UpdateJobAsync(id, jobUpdated);
         return res != null ? _jobMapper.MapToDTO(jobUpdated) : null;
     }

@@ -5,8 +5,6 @@ namespace Utvikler_portal.JobbModul.Models.DTOs;
 
 public class JobRegistrationDTO
 {
-    public Guid CompanyAccountId { get; init; }
-
     [Required, RegularExpression(@"^[a-zA-ZæøåÆØÅ][a-zA-ZæøåÆØÅ\s]{1,40}$")]
     public string Employer { get; init; } = string.Empty;
 

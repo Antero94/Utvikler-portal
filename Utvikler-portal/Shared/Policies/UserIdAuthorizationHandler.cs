@@ -3,9 +3,9 @@ using System.Security.Claims;
 
 namespace Utvikler_portal.Shared.Policies;
 
-public class IdAuthorizationHandler : AuthorizationHandler<IdAuthorizationRequirement>
+public class UserIdAuthorizationHandler : AuthorizationHandler<UserIdAuthorizationRequirement>
 {
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, IdAuthorizationRequirement requirement)
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, UserIdAuthorizationRequirement requirement)
     {
         if (context.Resource is HttpContext httpContext)
         {
@@ -13,9 +13,9 @@ public class IdAuthorizationHandler : AuthorizationHandler<IdAuthorizationRequir
             if (routeData.Values.TryGetValue("userId", out var value))
             {
                 var parameterId = value?.ToString();
-                var ClaimsId = context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
+                var claimsId = context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
 
-                if (Guid.TryParse(parameterId, out var id) == Guid.TryParse(ClaimsId, out var id2))
+                if (Guid.TryParse(parameterId, out var id) == Guid.TryParse(claimsId, out var id2))
                 {
                     context.Succeed(requirement);
                 }

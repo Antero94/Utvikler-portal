@@ -17,7 +17,6 @@ public class JobRegistrationMapper : IMapper<JobPost, JobRegistrationDTO>
 
         return new JobPost
         {
-            CompanyAccountId = dto.CompanyAccountId,
             Employer = dto.Employer,
             Position = dto.Position,
             JuniorOrSenior = dto.JuniorOrSenior,

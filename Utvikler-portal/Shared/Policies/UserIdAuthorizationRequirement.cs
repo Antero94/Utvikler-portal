@@ -2,6 +2,6 @@
 
 namespace Utvikler_portal.Shared.Policies;
 
-public class IdAuthorizationRequirement : IAuthorizationRequirement
+public class UserIdAuthorizationRequirement : IAuthorizationRequirement
 {
 }

@@ -23,7 +23,6 @@ public class CompanyAccountMapper : IMapper<CompanyAccount, CompanyAccountDTO>
 
         return new CompanyAccount()
         {
-            Id = dto.Id,
             CompanyName = dto.CompanyName,
             CompanyPhone = dto.CompanyPhone,
             CompanyEmail = dto.CompanyEmail,
