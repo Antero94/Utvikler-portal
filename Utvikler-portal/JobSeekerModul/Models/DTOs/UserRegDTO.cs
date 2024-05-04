@@ -1,9 +1,7 @@
-﻿
-namespace Utvikler_portal.JobSeekerModul.Models.DTOs;
+﻿namespace Utvikler_portal.JobSeekerModul.Models.DTOs;
 
-	public class UserRegDTO
-	{
-
+public class UserRegDTO
+{
     public Guid UserId { get; init; }
     public string FirstName { get; init; } = string.Empty;
     public string LastName { get; init; } = string.Empty;

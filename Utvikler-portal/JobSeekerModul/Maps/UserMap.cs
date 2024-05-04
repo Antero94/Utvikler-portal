@@ -4,7 +4,6 @@ using Utvikler_portal.JobSeekerModul.Models.Entities;
 
 namespace Utvikler_portal.JobSeekerModul.Maps;
 
-
 public class UserMap : IMaps<User, UserDTO>
 {
     public UserDTO MapToDTO(User model)

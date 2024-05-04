@@ -1,14 +1,12 @@
-﻿using System;
-using Utvikler_portal.JobSeekerModul.Maps.Interfaces;
+﻿using Utvikler_portal.JobSeekerModul.Maps.Interfaces;
 using Utvikler_portal.JobSeekerModul.Models.DTOs;
 using Utvikler_portal.JobSeekerModul.Models.Entities;
-
 
 namespace Utvikler_portal.JobSeekerModul.Maps;
 
 public class UserRegMap : IMaps<User, UserRegDTO>
 {
-	public UserRegDTO MapToDTO(User model)
+	public UserRegDTO? MapToDTO(User model)
 	{
 		if (model == null)
 			return null;
@@ -21,7 +19,6 @@ public class UserRegMap : IMaps<User, UserRegDTO>
 			Email = model.Email
 
 		};
-		
 	}
 
 	public User MapToModel(UserRegDTO dTO)
@@ -35,10 +32,7 @@ public class UserRegMap : IMaps<User, UserRegDTO>
 			Email = dTO.Email,
 			Created = dtNow,
 			Updated = dtNow
-
 		};
-
 	}
-
 }
 

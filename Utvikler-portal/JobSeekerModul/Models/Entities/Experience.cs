@@ -12,9 +12,10 @@ public class Experience
     public Guid UserId { get; set; }
 
     [Required]
-    public string CompanyName { get; set; }
+    public string CompanyName { get; set; } = string.Empty;
+
     [Required]
-    public string Position { get; set; }
+    public string Position { get; set; } = string.Empty;
 
     [Required]
     public DateTime StartDate { get; set; }

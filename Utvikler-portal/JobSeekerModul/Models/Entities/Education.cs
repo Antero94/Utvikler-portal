@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Utvikler_portal.JobSeekerModul.Models.Entities;
 
-
 public class Education
 {
     [Key]
@@ -13,13 +12,13 @@ public class Education
     public Guid UserId { get; set; }
 
     [Required]
-    public string School { get; set; }
+    public string School { get; set; } = string.Empty;
 
     [Required]
-    public string Degree { get; set; }
+    public string Degree { get; set; } = string.Empty;
 
     [Required]
-    public string FieldOfStudy { get; set; }
+    public string FieldOfStudy { get; set; } = string.Empty;
 
     [Required]
     public DateTime GraduationDate { get; set; }

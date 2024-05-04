@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Utvikler_portal.JobbModul.Models.DTOs;
 using Utvikler_portal.JobbModul.Services.Interfaces;
 
@@ -20,44 +21,47 @@ public class JobController : ControllerBase
         return Ok(await _jobService.GetAllJobsAsync(pageNr, pageSize, sortBy));
     }
 
-    [HttpGet("GetJob={id}", Name = "GetJob")]
+    [HttpGet("GetJob={jobId:Guid}", Name = "GetJob")]
     public async Task<ActionResult<JobPostDTO>> GetJobAsync(Guid id)
     {
         var job = await _jobService.GetJobByIdAsync(id);
-        if (job == null) return NotFound("Fant ikke jobb");
+        if (job == null) return NotFound("Job not found");
 
         return Ok(job);
     }
 
+    [Authorize]
     [HttpPost("CreateJob")]
     public async Task<ActionResult<JobPostDTO>> CreateJobAsync(JobRegistrationDTO dto)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var job = await _jobService.CreateJobAsync(dto);
-        if (job == null) return BadRequest("Kunne ikke legge til jobb");
+        if (job == null) return BadRequest("Something went wrong");
 
         return Ok(job);
     }
 
-    [HttpPut("UpdateJob", Name = "UpdateJob")]
+    [Authorize]
+    [HttpPut("UpdateJob={jobId:Guid}", Name = "UpdateJob")]
     public async Task<ActionResult<JobPostDTO>> UpdateJobAsync(Guid id, JobPostDTO jobPostDTO)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var job = await _jobService.UpdateJobAsync(id, jobPostDTO);
-        if (job == null) return NotFound("Fant ikke jobb");
+        if (job == null) return NotFound("Job not found");
 
         return Ok(job);
     }
 
-    [HttpDelete("DeleteJob", Name = "DeleteJob")]
+    [Authorize]
+    [HttpDelete("DeleteJob={jobId:Guid}", Name = "DeleteJob")]
     public async Task<ActionResult<JobPostDTO>> DeleteJobAsync(Guid id)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
         var job = await _jobService.DeleteJobAsync(id);
-        if (job == null) return NotFound("Fant ikke jobb");
+        if (job == null) return NotFound("Job not found");
 
         return Ok(job);
     }

@@ -1,10 +1,9 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Utvikler_portal.JobSeekerModul.Models.Entities;
 
-	public class User
-	{
+public class User
+{
     [Key]
     public Guid Id { get; set; }
 
@@ -20,7 +19,6 @@ namespace Utvikler_portal.JobSeekerModul.Models.Entities;
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
 
-   
     [Required]
     public DateTime Created { get; set; }
 
@@ -30,7 +28,4 @@ namespace Utvikler_portal.JobSeekerModul.Models.Entities;
     public List<Experience> Experiences { get; set; } = new List<Experience>();
     public List<Skill> Skills { get; set; } = new List<Skill>();
     public List<Education> Educations { get; set; } = new List<Education>();
-
-
 }
-

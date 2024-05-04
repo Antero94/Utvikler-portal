@@ -21,7 +21,7 @@ public class CompanyController : ControllerBase
     public async Task<ActionResult<CompanyAccountDTO>> CreateCompanyAccountAsync(CompanyRegistrationDTO dto, Guid userId)
     {
         var company = await _companyService.CreateCompanyAccountAsync(dto, userId);
-        if (company == null) return BadRequest("Kunne ikke legge til konto");
+        if (company == null) return BadRequest("Something went wrong");
 
         return Ok(company);
     }
@@ -36,7 +36,7 @@ public class CompanyController : ControllerBase
     public async Task<ActionResult<CompanyAccountDTO>> GetCompanyAsync(Guid userId)
     {
         var company = await _companyService.GetCompanyByIdAsync(userId);
-        if (company == null) return NotFound("Fant ikke bruker");
+        if (company == null) return NotFound("User not found");
 
         return Ok(company);
     }
@@ -47,22 +47,22 @@ public class CompanyController : ControllerBase
         return Ok(await _jobService.GetCompanySpecificJobsAsync(userId, pageNr, pageSize));
     }
 
-    [Authorize(Policy = "IdPolicy")]
+    [Authorize(Policy = "userIdPolicy")]
     [HttpPut("UpdateCompany={userId:Guid}", Name = "UpdateCompany")]
     public async Task<ActionResult<CompanyAccountDTO>> UpdateCompanyAsync(Guid userId, CompanyAccountDTO companyDTO)
     {
         var company = await _companyService.UpdateAsync(userId, companyDTO);
-        if (company == null) return NotFound("Fant ikke bruker");
+        if (company == null) return NotFound("User not found");
 
         return Ok(company);
     }
 
-    [Authorize(Policy = "IdPolicy")]
+    [Authorize(Policy = "userIdPolicy")]
     [HttpDelete("DeleteCompany={userId:Guid}", Name = "DeleteCompany")]
     public async Task<ActionResult<CompanyAccountDTO>> DeleteCompanyAsync(Guid userId)
     {
         var company = await _companyService.DeleteAsync(userId);
-        if (company == null) return NotFound("Fant ikke bruker");
+        if (company == null) return NotFound("User not found");
 
         return Ok(company);
     }

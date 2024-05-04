@@ -9,7 +9,7 @@ public static class HandlerRegistration
     {
         services.AddSingleton<IAuthorizationHandler, IdAuthorizationHandler>();
         services.AddAuthorization(options =>
-            options.AddPolicy("IdPolicy", policy => policy.Requirements.Add(new IdAuthorizationRequirement())));
+            options.AddPolicy("userIdPolicy", policy => policy.Requirements.Add(new IdAuthorizationRequirement())));
 
         return services;
     }
