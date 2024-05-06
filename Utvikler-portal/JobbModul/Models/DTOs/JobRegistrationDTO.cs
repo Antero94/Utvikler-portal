@@ -8,7 +8,7 @@ public class JobRegistrationDTO
     [Required, RegularExpression(@"^[a-zA-ZæøåÆØÅ][a-zA-ZæøåÆØÅ\s]{1,40}$")]
     public string Employer { get; init; } = string.Empty;
 
-    [Required, RegularExpression(@"^[a-zA-ZæøåÆØÅ][a-zA-ZæøåÆØÅ\s]{1,30}$")]
+    [Required, RegularExpression(@"^[a-zA-ZæøåÆØÅ][a-zA-ZæøåÆØÅ\s.#-]{1,30}$")]
     public string Position { get; init; } = string.Empty;
 
     [Required, RegularExpression(@"^[a-zA-Z]{6}$")]
@@ -29,7 +29,7 @@ public class JobRegistrationDTO
     [Required, MaxLength(1000)]
     public string Description { get; init; } = string.Empty;
 
-    [RegularExpression(@"^[a-zA-ZæøåÆØÅ]{1,50}$")]
+    [RegularExpression(@"^[a-zA-ZæøåÆØÅ\s,.#-]{1,100}$")]
     public string Tags { get; init; } = string.Empty;
 
     [Required, RegularExpression(@"^[a-zA-ZæøåÆØÅ][a-zA-ZæøåÆØÅ\s]{1,40}$")]

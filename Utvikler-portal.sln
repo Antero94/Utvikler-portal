@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utvikler-portal", "Utvikler
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtviklerPortalAPI.UnitTests", "Tests\UtviklerPortalAPI.UnitTests\UtviklerPortalAPI.UnitTests.csproj", "{22F1AA95-586A-4220-92C2-BD960A2399D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtviklerPortalAPI.IntegrationTests", "Tests\UtviklerPortalAPI.IntegrationTests\UtviklerPortalAPI.IntegrationTests.csproj", "{C5FB9299-A589-46F9-9721-1702A0272BD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F05CC5B-8FA3-4B90-B6F1-E8FCBE749E3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,17 @@ Global
 		{22F1AA95-586A-4220-92C2-BD960A2399D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22F1AA95-586A-4220-92C2-BD960A2399D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22F1AA95-586A-4220-92C2-BD960A2399D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5FB9299-A589-46F9-9721-1702A0272BD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5FB9299-A589-46F9-9721-1702A0272BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5FB9299-A589-46F9-9721-1702A0272BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5FB9299-A589-46F9-9721-1702A0272BD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22F1AA95-586A-4220-92C2-BD960A2399D4} = {0F05CC5B-8FA3-4B90-B6F1-E8FCBE749E3A}
+		{C5FB9299-A589-46F9-9721-1702A0272BD1} = {0F05CC5B-8FA3-4B90-B6F1-E8FCBE749E3A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E7F1712A-F0B0-4A64-B7E3-AFA28406056B}
