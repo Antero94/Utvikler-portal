@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: api-deployment
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-deployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: api-deployment
+    spec:
+      containers:
+      - image: yahiaalioua/prosjektoppgave:latest
+        name: prosjektoppgave
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}
