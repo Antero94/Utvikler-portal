@@ -10,7 +10,7 @@ public class EncryptionService:IEncryptionService
         int workFactor = 10;
         string salt = BCrypt.Net.BCrypt.GenerateSalt(workFactor);
         string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password,salt);
-        return new HashedPassword(salt,hashedPassword);
+        return new HashedPassword(hashedPassword,salt);
     }
 
     public bool VerifyPassword(string password, string passwordHash)

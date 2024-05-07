@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Utvikler_portal.Auth.DTO;
+using Utvikler_portal.Auth.Exceptions;
 using Utvikler_portal.Auth.Services;
 
 namespace Utvikler_portal.Shared.Controllers;
@@ -21,9 +22,22 @@ public class AuthController : Controller
             var response = await _memberService.RegisterMember(request);
             return Ok(response);
         }
-        catch (Exception)
+        catch (InvalidEmailException e)
         {
-            return BadRequest();
+            return BadRequest(e.Message);
+        }
+        catch (InvalidPasswordException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (InvalidUserTypeException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (Exception )
+        {
+            return BadRequest(
+                "service exception occurred, please try agin later or if the error persist contact support");
         }
     }
 
@@ -35,9 +49,17 @@ public class AuthController : Controller
             var response = await _memberService.Login(request);
             return Ok(response);
         }
-        catch (Exception)
+        catch (InvalidPasswordException e )
         {
-            return BadRequest();
+            return BadRequest(e.Message);
+        }
+        catch (MemberNotFoundException e )
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception )
+        {
+            return BadRequest("service exception occurred, please try agin later or if the error persist contact support");
         }
     }
 }

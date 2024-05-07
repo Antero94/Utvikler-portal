@@ -34,7 +34,7 @@ builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<UtviklerPortalDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+    options.UseMySql(builder.Configuration.GetConnectionString("Default"),
         new MySqlServerVersion(new Version(8, 0, 30))));
 builder.Services.AddScoped<IMaps<User, UserDTO>, UserMap>();
 builder.Services.AddScoped<IMaps<User, UserRegDTO>, UserRegMap>();

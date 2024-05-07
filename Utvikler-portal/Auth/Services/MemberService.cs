@@ -118,6 +118,7 @@ public class MemberService:IMemberService
             throw new MemberNotFoundException(email);
         }
     }
+
     public async Task<LoginUserResponse> Login(LoginUserRequest request)
     {
         try
@@ -126,7 +127,7 @@ public class MemberService:IMemberService
             IsPasswordValid(request.Password);
             Member? member = await _authRepository.GetMemberByEmail(Email.Create(request.Email));
             CheckMemberExists(member, request.Email);
-            if (_encryptionService.VerifyPassword(request.Password, member?.Hash))
+            if (!_encryptionService.VerifyPassword(request.Password, member?.Hash))
             {
                 throw new InvalidPasswordException("invalid password");
             }
@@ -138,9 +139,16 @@ public class MemberService:IMemberService
             LoginUserResponse response = new(accessToken, member.UserType.Value, "Login Success");
             return response;
         }
-        catch (Exception e)
+        catch (InvalidPasswordException)
         {
-            Console.WriteLine(e);
+            throw;
+        }
+        catch (MemberNotFoundException)
+        {
+            throw;
+        }
+        catch (Exception)
+        {
             throw;
         }
     }
