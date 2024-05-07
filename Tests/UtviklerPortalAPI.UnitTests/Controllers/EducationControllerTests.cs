@@ -64,7 +64,7 @@ public class EducationControllerTests
     {
         // Arrange
         Guid educationId = Guid.NewGuid();
-        _educationServiceMock.Setup(service => service.GetEducationByIdAsync(educationId)).ReturnsAsync((EducationDTO)null);
+        _educationServiceMock.Setup(service => service.GetEducationByIdAsync(educationId)).ReturnsAsync((EducationDTO)null!);
 
         // Act
         var result = await _educationController.GetEducationByIdAsync(educationId);

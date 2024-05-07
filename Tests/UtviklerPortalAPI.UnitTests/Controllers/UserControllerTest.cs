@@ -60,7 +60,7 @@ public class UserControllerTests
     {
         // Arrange
         Guid userId = Guid.NewGuid();
-        _userServiceMock.Setup(service => service.GetUserByIdAsync(userId)).ReturnsAsync((UserDTO)null);
+        _userServiceMock.Setup(service => service.GetUserByIdAsync(userId)).ReturnsAsync((UserDTO)null!);
 
         // Act
         var result = await _userController.GetUserByIdAsync(userId);
@@ -127,7 +127,7 @@ public class UserControllerTests
     {
         // Arrange
         Guid userId = Guid.NewGuid();
-        _userServiceMock.Setup(service => service.DeleteUserAsync(userId)).ReturnsAsync((UserDTO)null);
+        _userServiceMock.Setup(service => service.DeleteUserAsync(userId)).ReturnsAsync((UserDTO)null!);
 
         // Act
         var result = await _userController.DeleteUserAsync(userId);

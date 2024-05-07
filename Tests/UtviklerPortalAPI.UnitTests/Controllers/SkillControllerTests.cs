@@ -60,7 +60,7 @@ public class SkillControllerTests
     {
         // Arrange
         Guid skillId = Guid.NewGuid();
-        _skillServiceMock.Setup(service => service.GetSkillByIdAsync(skillId)).ReturnsAsync((SkillDTO)null);
+        _skillServiceMock.Setup(service => service.GetSkillByIdAsync(skillId)).ReturnsAsync((SkillDTO)null!);
 
         // Act
         var result = await _skillController.GetSkillByIdAsync(skillId);

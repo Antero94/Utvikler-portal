@@ -60,7 +60,7 @@ public class ExperienceControllerTests
     {
         // Arrange
         Guid experienceId = Guid.NewGuid();
-        _experienceServiceMock.Setup(service => service.GetExperienceByIdAsync(experienceId)).ReturnsAsync((ExperienceDTO)null);
+        _experienceServiceMock.Setup(service => service.GetExperienceByIdAsync(experienceId)).ReturnsAsync((ExperienceDTO)null!);
 
         // Act
         var result = await _experienceController.GetExperienceByIdAsync(experienceId);
