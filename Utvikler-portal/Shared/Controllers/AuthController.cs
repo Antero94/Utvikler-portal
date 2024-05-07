@@ -14,6 +14,12 @@ public class AuthController : Controller
         _memberService = memberService;
     }
 
+    [HttpGet("test")]
+    public IActionResult TestApi()
+    {
+        return Ok("api running");
+    }
+
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterMemberRequest request)
     {

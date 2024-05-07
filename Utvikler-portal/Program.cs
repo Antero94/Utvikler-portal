@@ -60,6 +60,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<UtviklerPortalDbContext>();    
+    context.Database.Migrate();
+}
+
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
