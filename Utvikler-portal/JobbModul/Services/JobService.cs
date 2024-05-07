@@ -41,9 +41,9 @@ public class JobService : IJobService
         return res != null ? _jobMapper.MapToDTO(job) : null;
     }
 
-    public async Task<ICollection<JobPostDTO>> GetAllJobsAsync(int pageNr, int pageSize, string sortBy)
+    public async Task<ICollection<JobPostDTO>> GetAllJobsAsync(int pageNr, int pageSize, string sortBy, string search)
     {
-        var jobs = await _jobRepository.GetAllJobsAsync(pageNr, pageSize, sortBy);
+        var jobs = await _jobRepository.GetAllJobsAsync(pageNr, pageSize, sortBy, search);
         var dto = jobs.Select(_jobMapper.MapToDTO).ToList();
 
         return dto;

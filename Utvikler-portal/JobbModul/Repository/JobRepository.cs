@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Utvikler_portal.JobbModul.Models.Entities;
 using Utvikler_portal.JobbModul.Repository.Interfaces;
 using Utvikler_portal.Shared.Data;
@@ -33,12 +34,23 @@ public class JobRepository : IJobRepository
         return entity.Entity;
     }
 
-    public async Task<ICollection<JobPost>> GetAllJobsAsync(int pageNr, int pageSize, string sortBy)
+    public async Task<ICollection<JobPost>> GetAllJobsAsync(int pageNr, int pageSize, string sortBy, string search)
     {
         var jobs = await _dbContext.JobPosts
             .Skip(pageSize * (pageNr - 1))
             .Take(pageSize).ToListAsync();
 
+        if (!string.IsNullOrEmpty(search))
+        {
+            jobs = jobs.Where(x => x.JuniorOrSenior == search
+                || x.Title.Contains(search)
+                || x.Location.Contains(search)
+                || x.Position.Contains(search)
+                || x.Tags.Contains(search)
+                || x.Employer.Contains(search))
+                .ToList();
+        }
+        
         switch (sortBy)
         {
             case "Frist":

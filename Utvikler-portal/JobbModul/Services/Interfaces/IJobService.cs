@@ -4,7 +4,7 @@ namespace Utvikler_portal.JobbModul.Services.Interfaces;
 
 public interface IJobService
 {
-    Task<ICollection<JobPostDTO>> GetAllJobsAsync(int pageNr, int pageSize, string sortBy);
+    Task<ICollection<JobPostDTO>> GetAllJobsAsync(int pageNr, int pageSize, string sortBy, string search);
     Task<ICollection<JobPostDTO>> GetCompanySpecificJobsAsync(Guid id, int pageNr, int pageSize);
     Task<JobPostDTO?> GetJobByIdAsync(Guid id);
     Task<JobPostDTO?> CreateJobAsync(JobRegistrationDTO dto);

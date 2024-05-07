@@ -12,7 +12,7 @@ namespace UtviklerPortalAPI.IntegrationTests;
 public class UtviklerPortalApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
     private readonly MySqlContainer _dbContainer = new MySqlBuilder()
-        .WithImage("mysql:8.0.30")
+        .WithImage("mysql:8.0.30").WithDatabase("utvikler_portal").WithUsername("ga-app").WithPassword("ga_5ecret-%")
         .Build();
 
     public async Task InitializeAsync()

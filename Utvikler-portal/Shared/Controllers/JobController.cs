@@ -16,9 +16,9 @@ public class JobController : ControllerBase
     }
 
     [HttpGet("GetAllJobs", Name = "GetAllJobs")]
-    public async Task<ActionResult<IEnumerable<JobPostDTO>>> GetAllJobsAsync(int pageNr = 1, int pageSize = 10, string sortBy = "")
+    public async Task<ActionResult<IEnumerable<JobPostDTO>>> GetAllJobsAsync(int pageNr = 1, int pageSize = 10, string sortBy = "", string search = "")
     {
-        return Ok(await _jobService.GetAllJobsAsync(pageNr, pageSize, sortBy));
+        return Ok(await _jobService.GetAllJobsAsync(pageNr, pageSize, sortBy, search));
     }
 
     [HttpGet("GetJob={jobId:Guid}", Name = "GetJob")]
